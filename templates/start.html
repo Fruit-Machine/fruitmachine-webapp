@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block content %}
+<p>Hello, {{ name }}.</p>
+<form method="post">
+<div class="row">
+	<div class="col-12 form-group">
+		<input type="hidden" name="action" value="start"/>
+		<input type="hidden" name="name" value="{{ name }}"/>
+		<label>
+			On a scale from zero to eleven, how gay are you?
+		</label>
+	</div>
+{% for gay in range(12) %}
+	<div class="col-1">
+		<input type="submit" class="btn btn-primary" name="gay" value="{{ gay }}"/>
+	</div>
+{% endfor %}
+</div>
+</form>
+{% endblock %}

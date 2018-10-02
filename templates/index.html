@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block content %}
+<form method="post" action="start">
+	<div class="form-group">
+		<input type="hidden" name="action" value="start"/>
+		<label>
+			Please enter your name
+			<input type="text" name="name" class="form-control"/>
+		</label>
+	</div>
+	<div class="col-12">
+		<button type="submit" class="btn btn-primary">Start</button>
+	</div>
+</form>
+{% endblock %}
