@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block content %}
+<p>
+{% if colour %}
+The light should currently be {{ colour }}.
+{% else %}
+Pick a colour to begin.
+{% endif %}
+</p>
+<ul>
+	{% for key in xy %}
+	<li><a href="/colour/{{ key }}">{{ key }}</a></li>
+	{% endfor %}
+</ul>	
+{% endblock %}

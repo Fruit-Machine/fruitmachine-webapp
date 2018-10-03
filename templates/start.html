@@ -7,11 +7,11 @@
 		<input type="hidden" name="action" value="start"/>
 		<input type="hidden" name="name" value="{{ name }}"/>
 		<label>
-			On a scale from zero to eleven, how gay are you?
+			On a scale from zero to five, how gay are you?
 		</label>
 	</div>
-{% for gay in range(12) %}
-	<div class="col-1">
+{% for gay in range(6) %}
+	<div class="col-2">
 		<input type="submit" class="btn btn-primary" name="gay" value="{{ gay }}"/>
 	</div>
 {% endfor %}
