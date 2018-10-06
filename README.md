@@ -8,13 +8,21 @@ This is a Python web application that performs the following functions:
 3. ???
 4. Profit
 
-Running this project:
+## Running this project:
 
 0. Make sure you have Python installed. https://www.python.org/
 1. Get the code:
-  $ git clone <GIT URL>
+```
+  $ git clone https://github.com/Fruit-Machine/fruitmachine-webapp.git
   $ cd fruitmachine-webapp
-2. Install Python dependencies
+```
+2. Install Python dependencies "Flask" and "Phue"
+```
+  $ pip install flask phue
+```
 3. Run web app
+```
+  $ python3 app.py
+```
 4. Open your web browser to http://localhost:5000/
 
