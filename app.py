@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect, url_for
 from phue import Bridge
 
 '''
@@ -6,7 +6,7 @@ from phue import Bridge
     "run-once" connect command.
 '''
 # IP address of the Hue bridge
-bridgeip = '192.168.1.3'
+bridgeip = '192.168.1.2'
 # Connect to the bridge
 b = Bridge(bridgeip)
 # If the connection file doesn't exist, run the connect command
@@ -31,9 +31,35 @@ def cake():
 	return 'Cake is a sweetie!'
 
 # Start route
-@app.route('/start', methods=['POST', 'GET'])
-def start():
-	return render_template('start.html', name=request.form['name'])
+@app.route('/question/<question>', methods=['POST', 'GET'])
+def start(question):
+    # if the question number is not numeric then hax!
+    if not is_int(question):
+        return redirect(url_for('index'))
+    # If we don't have an ID then we generate one
+    import random, sys
+    user_id = (request.form['id'] if 'id' in request.form else random.randint(1, sys.maxsize))
+    # We've got an ID; let's see if we've got a pickle file yet
+    import pickle
+    pickle_file = '/home/pi/fruitmachine-webapp/pickles/' + user_id.__str__() + '.pickle'
+    user = {}
+    if os.path.isfile(pickle_file):
+        # Read pickle file into user object
+        pickle_in = open(pickle_file, 'rb')
+        user = pickle.load(pickle_in)
+        pickle_in.close()
+    else:
+        # Initialize user object
+        user = {'id': user_id}
+    # Add form data into user object
+    for key in request.form:
+        user[key] = request.form[key]
+    # save pickle
+    pickle_out = open(pickle_file, 'wb')
+    pickle.dump(user, pickle_out)
+    pickle_out.close()
+    # Render page
+    return render_template('start.html', user=user)
 
 '''
     Set up some colour constants
@@ -58,6 +84,17 @@ def colour(colour):
         # Here we want to turn the lights a particular colour
         b.set_light('Gayness Lamp', 'xy', xy[colour])
     return render_template('colour.html', colour=colour, xy=xy)
+
+# Helper methods
+
+# Return boolean indicating whether the given value is an int
+def is_int(s):
+    try:
+        int(s)
+        return True
+    except ValueError:
+        return False
+
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0')

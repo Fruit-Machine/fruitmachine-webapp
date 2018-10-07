@@ -1,11 +1,10 @@
 {% extends "base.html" %}
 {% block content %}
-<p>Hello, {{ name }}.</p>
+<p>Hello, {{ user['name'] }}.</p>
 <form method="post">
 <div class="row">
 	<div class="col-12 form-group">
-		<input type="hidden" name="action" value="start"/>
-		<input type="hidden" name="name" value="{{ name }}"/>
+		<input type="hidden" name="id" value="{{ user['id'] }}"/>
 		<label>
 			On a scale from zero to five, how gay are you?
 		</label>
@@ -17,4 +16,7 @@
 {% endfor %}
 </div>
 </form>
+<pre>
+{{ user }}
+</pre>
 {% endblock %}
