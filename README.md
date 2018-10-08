@@ -26,3 +26,6 @@ This is a Python web application that performs the following functions:
 ```
 4. Open your web browser to http://localhost:5000/
 
+## Adding/editing questions:
+
+Edit the `questions.json` file. Its format is fairly simple, which means that you can't really do anything too complicated with the questions.
