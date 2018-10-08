@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for
 from phue import Bridge
+import fruit_machine
 
 '''
     Set up Hue bridge. We have here settings for the bridge, as well as a 
@@ -18,15 +19,6 @@ if not os.path.isfile('/home/pi/.python_hue'):
     Finished Hue bridge setup
 '''
 
-'''
-    Begin app setup
-'''
-app_directory = os.path.dirname(os.path.abspath(__file__))
-pickle_directory = app_directory + '/pickles'
-'''
-    End app setup
-'''
-
 app = Flask(__name__)
 
 # Default route
@@ -42,7 +34,7 @@ def cake():
 # Start route
 @app.route('/start', methods=['POST', 'GET'])
 def start():
-    # 
+    # If we don't have a name, redirect back to index
     if not 'name' in request.form:
         return redirect(url_for('index'))
     import random, sys
@@ -53,19 +45,22 @@ def start():
 @app.route('/question/<question_id>', methods=['POST', 'GET'])
 def question(question_id):
     # if the question number is not numeric then hax!
-    if not is_int(question_id):
+    if not fruit_machine.is_int(question_id):
         return redirect(url_for('index'))
     if not 'id' in request.form:
         return redirect(url_for('index'))
     # Get the user ID and create a user object
-    user = load_user(request.form['id'])
+    user = fruit_machine.load_user(request.form['id'])
     # Add form data into user object
     for key in request.form:
         user[key] = request.form[key]
     # save pickle
-    save_user(user)
+    fruit_machine.save_user(user)
+    # If we don't have a selfie, forward to the photo page
+    if not 'portrait' in user:
+        return start()
     # Now let's load the question object
-    question, qdata = get_question(question_id)
+    question, qdata = fruit_machine.get_question(question_id)
     # Render page
     if question:
         return render_template('question.html', user=user, question=question, qdata=qdata, next=int(question_id)+1)
@@ -74,15 +69,8 @@ def question(question_id):
 
 @app.route('/verdict/<user_id>')
 def verdict(user_id):
-    import hashlib
-    m=hashlib.md5()
-    user = load_user(user_id)
-    for key in sorted(user.keys()):
-        if is_int(key):
-            m.update(user[key].encode("utf-8"))
-    user['hash'] = m.hexdigest()
-    user['gender'] = genders[user['hash'][0]]
-    user['sexuality'] = sexualities[user['hash'][1]]
+    user = fruit_machine.load_user(user_id)
+    user = fruit_machine.evaluate_user(user)
     return user.__str__()
 
 '''
@@ -101,46 +89,6 @@ xy = {
     End colour constants
 '''
 
-'''
-    Set up our gender/sexuality categories
-'''
-genders = {
-        '0': 'trans male',
-        '1': 'trans female',
-        '2': 'cis female',
-        '3': 'cis male',
-        '4': 'demigender male',
-        '5': 'demigender female',
-        '6': 'ambigender',
-        '7': 'gender fluid',
-        '8': 'agender',
-        '9': 'bigender',
-        'a': 'gender variant',
-        'b': 'intersex',
-        'c': 'two-spirit',
-        'd': 'transmasculine',
-        'e': 'transfeminine',
-        'f': 'non-binary'
-}
-sexualities = {
-        '0': 'homosexual',
-        '1': 'ambisexual',
-        '2': 'protosexual',
-        '3': 'bisexual',
-        '4': 'asexual',
-        '5': 'demisexual',
-        '6': 'pansexual',
-        '7': 'heterosexual',
-        '8': 'cryptosexual',
-        '9': 'grey asexual',
-        'a': 'bicurious',
-        'b': 'autosexual',
-        'c': 'perisexual',
-        'd': 'xenosexual',
-        'e': 'queer',
-        'f': 'questioning'
-}
-
 # Test route for colours
 @app.route('/colour/<colour>')
 def colour(colour):
@@ -149,53 +97,7 @@ def colour(colour):
         b.set_light('Gayness Lamp', 'xy', xy[colour])
     return render_template('colour.html', colour=colour, xy=xy)
 
-# Helper methods
-
-import pickle
-
-# Return a user object corresponding to the given ID
-def load_user(user_id):
-    pickle_file = user_file(user_id)
-    user = {}
-    if os.path.isfile(pickle_file):
-        # Read pickle file into user object
-        pickle_in = open(pickle_file, 'rb')
-        user = pickle.load(pickle_in)
-        pickle_in.close()
-    else:
-        # Initialize user object
-        user = {'id': user_id}
-    return user
-
-def save_user(user):
-    pickle_out = open(user_file(user['id']), 'wb')
-    pickle.dump(user, pickle_out)
-    pickle_out.close()
-
-# Given an ID, return a string path for the corresponding pickle file
-def user_file(user_id):
-    return pickle_directory + '/' + user_id.__str__() + '.pickle'
-
-# Given a question number, return the corresponding question object
-def get_question(number):
-    import json
-    question_file = open('questions.json')
-    question_data = json.loads(question_file.read())
-    question = False
-    if number in question_data:
-        question = question_data[number]
-        question['id'] = number
-    return question, question_data
-
-# Return boolean indicating whether the given value is an int
-def is_int(s):
-    try:
-        int(s)
-        return True
-    except ValueError:
-        return False
-
-
+# When we run this script directly, start a server
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0')
 
