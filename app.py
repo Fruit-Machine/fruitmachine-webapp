@@ -57,7 +57,7 @@ def question(question_id):
     # save pickle
     fruit_machine.save_user(user)
     # If we don't have a selfie, forward to the photo page
-    if not 'portrait' in user:
+    if not 'portrait' in user or not user['portrait']:
         return start()
     # Now let's load the question object
     question, qdata = fruit_machine.get_question(question_id)
@@ -71,7 +71,11 @@ def question(question_id):
 def verdict(user_id):
     user = fruit_machine.load_user(user_id)
     user = fruit_machine.evaluate_user(user)
-    return user.__str__()
+    return render_template('verdict.html', user=user)
+
+@app.route('/debrief')
+def debrief():
+    return render_template('debrief.html')
 
 '''
     Set up some colour constants
