@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block content %}
+<form method="post" action="/question/{{ next }}">
+<div class="row">
+	<div class="col-12 form-group">
+		<input type="hidden" name="id" value="{{ user['id'] }}"/>
+		<label>
+			{{ question['question'] }}
+		</label>
+	</div>
+{% for response in question['responses'] %}
+	<div class="col-2">
+		<input type="submit" class="btn btn-primary" name="{{ question['id'] }}" value="{{ response }}"/>
+	</div>
+{% endfor %}
+</div>
+</form>
+<pre>
+{{ user }}
+{{ qdata }}
+</pre>
+{% endblock %}

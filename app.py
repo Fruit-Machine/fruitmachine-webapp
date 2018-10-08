@@ -18,6 +18,15 @@ if not os.path.isfile('/home/pi/.python_hue'):
     Finished Hue bridge setup
 '''
 
+'''
+    Begin app setup
+'''
+app_directory = os.path.dirname(os.path.abspath(__file__))
+pickle_directory = app_directory + '/pickles'
+'''
+    End app setup
+'''
+
 app = Flask(__name__)
 
 # Default route
@@ -28,38 +37,53 @@ def index():
 # Cake route
 @app.route('/cake')
 def cake():
-	return 'Cake is a sweetie!'
+    return 'Cake is a sweetie!'
 
 # Start route
-@app.route('/question/<question>', methods=['POST', 'GET'])
-def start(question):
-    # if the question number is not numeric then hax!
-    if not is_int(question):
+@app.route('/start', methods=['POST', 'GET'])
+def start():
+    # 
+    if not 'name' in request.form:
         return redirect(url_for('index'))
-    # If we don't have an ID then we generate one
     import random, sys
     user_id = (request.form['id'] if 'id' in request.form else random.randint(1, sys.maxsize))
-    # We've got an ID; let's see if we've got a pickle file yet
-    import pickle
-    pickle_file = '/home/pi/fruitmachine-webapp/pickles/' + user_id.__str__() + '.pickle'
-    user = {}
-    if os.path.isfile(pickle_file):
-        # Read pickle file into user object
-        pickle_in = open(pickle_file, 'rb')
-        user = pickle.load(pickle_in)
-        pickle_in.close()
-    else:
-        # Initialize user object
-        user = {'id': user_id}
+    return render_template('start.html', user_name=request.form['name'], user_id=user_id)
+
+# Question route
+@app.route('/question/<question_id>', methods=['POST', 'GET'])
+def question(question_id):
+    # if the question number is not numeric then hax!
+    if not is_int(question_id):
+        return redirect(url_for('index'))
+    if not 'id' in request.form:
+        return redirect(url_for('index'))
+    # Get the user ID and create a user object
+    user = load_user(request.form['id'])
     # Add form data into user object
     for key in request.form:
         user[key] = request.form[key]
     # save pickle
-    pickle_out = open(pickle_file, 'wb')
-    pickle.dump(user, pickle_out)
-    pickle_out.close()
+    save_user(user)
+    # Now let's load the question object
+    question, qdata = get_question(question_id)
     # Render page
-    return render_template('start.html', user=user)
+    if question:
+        return render_template('question.html', user=user, question=question, qdata=qdata, next=int(question_id)+1)
+    else:
+        return redirect('/verdict/' + user['id'])
+
+@app.route('/verdict/<user_id>')
+def verdict(user_id):
+    import hashlib
+    m=hashlib.md5()
+    user = load_user(user_id)
+    for key in sorted(user.keys()):
+        if is_int(key):
+            m.update(user[key].encode("utf-8"))
+    user['hash'] = m.hexdigest()
+    user['gender'] = genders[user['hash'][0]]
+    user['sexuality'] = sexualities[user['hash'][1]]
+    return user.__str__()
 
 '''
     Set up some colour constants
@@ -77,6 +101,46 @@ xy = {
     End colour constants
 '''
 
+'''
+    Set up our gender/sexuality categories
+'''
+genders = {
+        '0': 'trans male',
+        '1': 'trans female',
+        '2': 'cis female',
+        '3': 'cis male',
+        '4': 'demigender male',
+        '5': 'demigender female',
+        '6': 'ambigender',
+        '7': 'gender fluid',
+        '8': 'agender',
+        '9': 'bigender',
+        'a': 'gender variant',
+        'b': 'intersex',
+        'c': 'two-spirit',
+        'd': 'transmasculine',
+        'e': 'transfeminine',
+        'f': 'non-binary'
+}
+sexualities = {
+        '0': 'homosexual',
+        '1': 'ambisexual',
+        '2': 'protosexual',
+        '3': 'bisexual',
+        '4': 'asexual',
+        '5': 'demisexual',
+        '6': 'pansexual',
+        '7': 'heterosexual',
+        '8': 'cryptosexual',
+        '9': 'grey asexual',
+        'a': 'bicurious',
+        'b': 'autosexual',
+        'c': 'perisexual',
+        'd': 'xenosexual',
+        'e': 'queer',
+        'f': 'questioning'
+}
+
 # Test route for colours
 @app.route('/colour/<colour>')
 def colour(colour):
@@ -86,6 +150,42 @@ def colour(colour):
     return render_template('colour.html', colour=colour, xy=xy)
 
 # Helper methods
+
+import pickle
+
+# Return a user object corresponding to the given ID
+def load_user(user_id):
+    pickle_file = user_file(user_id)
+    user = {}
+    if os.path.isfile(pickle_file):
+        # Read pickle file into user object
+        pickle_in = open(pickle_file, 'rb')
+        user = pickle.load(pickle_in)
+        pickle_in.close()
+    else:
+        # Initialize user object
+        user = {'id': user_id}
+    return user
+
+def save_user(user):
+    pickle_out = open(user_file(user['id']), 'wb')
+    pickle.dump(user, pickle_out)
+    pickle_out.close()
+
+# Given an ID, return a string path for the corresponding pickle file
+def user_file(user_id):
+    return pickle_directory + '/' + user_id.__str__() + '.pickle'
+
+# Given a question number, return the corresponding question object
+def get_question(number):
+    import json
+    question_file = open('questions.json')
+    question_data = json.loads(question_file.read())
+    question = False
+    if number in question_data:
+        question = question_data[number]
+        question['id'] = number
+    return question, question_data
 
 # Return boolean indicating whether the given value is an int
 def is_int(s):

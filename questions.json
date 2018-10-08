@@ -1,0 +1,10 @@
+{
+	"1":{
+		"question": "On a scale from zero to five, how gay are you?",
+		"responses": ["0", "1", "2", "3", "4", "5"]
+	},
+	"2":{
+		"question": "Do you like to look at flowers?",
+		"responses": ["Yes, very much", "Somewhat", "Meh", "Hate it"]
+	}
+}
