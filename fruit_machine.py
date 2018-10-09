@@ -34,14 +34,23 @@ def save_user(user):
     pickle_out.close()
 
 def evaluate_user(user):
-    import hashlib
+    import hashlib, colour
+    # Create a hash of the user
     m=hashlib.md5()
     for key in sorted(user.keys()):
         if is_int(key):
             m.update(user[key].encode("utf-8"))
     user['hash'] = m.hexdigest()
+    # Use the hash to generate gender and sexuality
     user['gender'] = genders[user['hash'][0]]
     user['sexuality'] = sexualities[user['hash'][1]]
+    # Use the hash to generate a hex colour
+    user['colour_hex'] = user['hash'][2:8]
+    # Use the same section of the hash to generate an xy colour
+    hexr = user['hash'][2:4]
+    hexg = user['hash'][4:6]
+    hexb = user['hash'][6:8]
+    user['colour_xyb'] = rgb_to_xyb(hexr, hexg, hexb)
     return user
 
 # Given an ID, return a string path for the corresponding pickle file
