@@ -1,18 +1,56 @@
 '''
-Functions dealing with user objects: defining, updating, storing, loading
-'''
-
-import pickle
-
-'''
     Begin app setup
 '''
 import os
 app_directory = os.path.dirname(os.path.abspath(__file__))
-pickle_directory = app_directory + '/pickles'
+home_directory = '~'
 '''
     End app setup
 '''
+
+'''
+Functions dealing with connecting to and communicating with the Hue bridge
+'''
+from phue import Bridge
+# Set this to False to run the app without Hue support
+with_hue = False
+# IP address of the Hue bridge
+bridge_ip = '192.168.1.2'
+lamp_name = 'Gayness Lamp'
+b = Bridge(bridge_ip) if with_hue else None
+
+'''
+    "run-once" connect command.
+'''
+def connect_hue():
+    if not with_hue:
+        return
+    if os.path.isfile(home_directory + "/.python_hue"):
+        return
+    b.connect()
+
+'''
+change the colour of our bulb
+'''
+def set_light(xyb):
+    if not with_hue: 
+        return
+    b.set_light(lamp_name, {'xy': xyb[0:2], 'bri': xyb[2]})
+
+'''
+Trigger the "colorloop" effect of the light
+'''
+def colorloop():
+    if not with_hue:
+        return
+    b.get_light(lamp_name).effect('colorloop')
+
+'''
+Functions dealing with user objects: defining, updating, storing, loading
+'''
+
+import pickle
+pickle_directory = app_directory + '/pickles'
 
 # Return a user object corresponding to the given ID
 def load_user(user_id):
@@ -50,7 +88,7 @@ def evaluate_user(user):
     hexr = user['hash'][2:4]
     hexg = user['hash'][4:6]
     hexb = user['hash'][6:8]
-    user['colour_xyb'] = rgb_to_xyb(hexr, hexg, hexb)
+    user['colour_xyb'] = colour.rgb_to_xyb(hexr, hexg, hexb)
     return user
 
 # Given an ID, return a string path for the corresponding pickle file

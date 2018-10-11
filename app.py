@@ -1,23 +1,5 @@
 from flask import Flask, render_template, request, redirect, url_for
-from phue import Bridge
 import fruit_machine
-
-'''
-    Set up Hue bridge. We have here settings for the bridge, as well as a 
-    "run-once" connect command.
-'''
-# IP address of the Hue bridge
-bridgeip = '192.168.1.2'
-# Connect to the bridge
-b = Bridge(bridgeip)
-# If the connection file doesn't exist, run the connect command
-import os
-if not os.path.isfile('/home/pi/.python_hue'):
-    # Connect
-    b.connect()
-'''
-    Finished Hue bridge setup
-'''
 
 app = Flask(__name__)
 
@@ -71,6 +53,7 @@ def question(question_id):
 def verdict(user_id):
     user = fruit_machine.load_user(user_id)
     user = fruit_machine.evaluate_user(user)
+    fruit_machine.set_light(user['colour_xyb'])
     return render_template('verdict.html', user=user)
 
 @app.route('/debrief')
@@ -98,10 +81,12 @@ xy = {
 def colour(colour):
     if colour in xy:
         # Here we want to turn the lights a particular colour
-        b.set_light('Gayness Lamp', 'xy', xy[colour])
+        fruit_machine.set_light(xy[colour])
+    elif colour == "loop":
+        fruit_machine.colorloop()
     return render_template('colour.html', colour=colour, xy=xy)
 
 # When we run this script directly, start a server
 if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0')
+    app.run(debug=True, host='0.0.0.0', port=8080)
 
