@@ -13,7 +13,7 @@ Functions dealing with connecting to and communicating with the Hue bridge
 '''
 from phue import Bridge
 # Set this to False to run the app without Hue support
-with_hue = False
+with_hue = True
 # IP address of the Hue bridge
 bridge_ip = '192.168.1.2'
 lamp_name = 'Gayness Lamp'
