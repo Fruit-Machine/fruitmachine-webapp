@@ -6,5 +6,9 @@
 	"2": {
 		"question": "Do you like to look at flowers?",
 		"responses": ["Yes, very much", "Somewhat", "Meh", "Hate it"]
+	},
+	"3": {
+		"question": "True or false: you would be sexually attracted to an identical copy of yourself.",
+		"responses": ["True", "False"]
 	}
 }
