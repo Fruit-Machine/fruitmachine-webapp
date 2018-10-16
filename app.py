@@ -6,6 +6,7 @@ app = Flask(__name__)
 # Default route
 @app.route('/')
 def index():
+    fruit_machine.light_off()
     return render_template('index.html')
 
 # Cake route
@@ -17,9 +18,10 @@ def cake():
 @app.route('/start', methods=['POST', 'GET'])
 def start():
     # If we don't have a name, redirect back to index
-    if not 'name' in request.form:
+    if not 'name' in request.form or not request.form['name']:
         return redirect(url_for('index'))
     import random, sys
+    fruit_machine.colorloop()
     user_id = (request.form['id'] if 'id' in request.form else random.randint(1, sys.maxsize))
     return render_template('start.html', user_name=request.form['name'], user_id=user_id)
 
@@ -81,7 +83,7 @@ xy = {
 def colour(colour):
     if colour in xy:
         # Here we want to turn the lights a particular colour
-        fruit_machine.set_light(xy[colour])
+        fruit_machine.set_light(xy[colour] + (127,))
     elif colour == "loop":
         fruit_machine.colorloop()
     return render_template('colour.html', colour=colour, xy=xy)

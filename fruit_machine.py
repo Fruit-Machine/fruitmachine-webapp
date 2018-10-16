@@ -25,8 +25,8 @@ b = Bridge(bridge_ip) if with_hue else None
 def connect_hue():
     if not with_hue:
         return
-    if os.path.isfile(home_directory + "/.python_hue"):
-        return
+    #if os.path.isfile(home_directory + "/.python_hue"):
+    #    return
     b.connect()
 
 '''
@@ -35,7 +35,7 @@ change the colour of our bulb
 def set_light(xyb):
     if not with_hue: 
         return
-    b.set_light(lamp_name, {'xy': xyb[0:2], 'bri': xyb[2]})
+    b.set_light(lamp_name, {'on': True, 'xy': xyb[0:2], 'effect': 'none', 'bri': int(xyb[2]*255)})
 
 '''
 Trigger the "colorloop" effect of the light
@@ -43,7 +43,15 @@ Trigger the "colorloop" effect of the light
 def colorloop():
     if not with_hue:
         return
-    b.get_light(lamp_name).effect('colorloop')
+    b.set_light(lamp_name, {'on': True, 'effect': 'colorloop'})
+
+'''
+Turn light off
+'''
+def light_off():
+    if not with_hue:
+        return
+    b.set_light(lamp_name, {'on': False})
 
 '''
 Functions dealing with user objects: defining, updating, storing, loading
@@ -89,6 +97,8 @@ def evaluate_user(user):
     hexg = user['hash'][4:6]
     hexb = user['hash'][6:8]
     user['colour_xyb'] = colour.rgb_to_xyb(hexr, hexg, hexb)
+    # Hack a different colour:
+    user['colour_xyb'] = colour.hack_xyb(hexr, hexg, hexb)
     return user
 
 # Given an ID, return a string path for the corresponding pickle file
@@ -143,7 +153,7 @@ into question objects
 # Given a question number, return the corresponding question object
 def get_question(number):
     import json
-    question_file = open('questions.json')
+    question_file = open(app_directory + '/questions.json')
     question_data = json.loads(question_file.read())
     question = False
     if number in question_data:
