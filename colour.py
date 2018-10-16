@@ -74,6 +74,15 @@ def rgb_to_xyb(hexr, hexg, hexb):
     return x, y, Y
 
 '''
+Hack: If rgb_to_xyb is not working
+'''
+def hack_xyb(hx, hy, hb):
+    ix, iy, ib = [int(a, 16) for a in [hx, hy, hb]]
+    x, y = [a/255 for a in [ix, iy]]
+    b = min(ib, 254)
+    return x, y, b
+
+'''
 Gamma correction. Here we assume that `value` is between 0.0 and 1.0
 '''
 def gamma_correct(value):
