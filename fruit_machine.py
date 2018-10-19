@@ -17,7 +17,10 @@ with_hue = True
 # IP address of the Hue bridge
 bridge_ip = '192.168.1.2'
 lamp_name = 'Gayness Lamp'
-b = Bridge(bridge_ip) if with_hue else None
+try:
+    b = Bridge(bridge_ip) if with_hue else None
+except ConnectionRefusedError:
+    with_hue = False
 
 '''
     "run-once" connect command.
