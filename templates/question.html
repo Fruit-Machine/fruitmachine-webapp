@@ -1,4 +1,7 @@
 {% extends "base.html" %}
+{% block header %}
+Please answer the following question honestly.
+{% endblock %}
 {% block content %}
 <form method="post" action="/question/{{ next }}">
 <div class="row">
@@ -9,15 +12,24 @@
 		</label>
 	</div>
 {% for response in question['responses'] %}
-	<div class="col-2">
+	<div class="col-6">
 		<input type="submit" class="btn btn-primary" name="{{ question['id'] }}" value="{{ response }}"/>
 	</div>
 {% endfor %}
 </div>
 </form>
+{% endblock %}
+{% block footer %}
+<!--
 <pre>
 {{ user }}
 {{ qdata }}
 </pre>
+ -->
+{% if next > 5 %}
+<form action="/verdict/{{ user['id'] }}">
+	<button type="submit" class="btn btn-success btn-lg btn-block">I'm done with this test</button>
+</form>
+{% endif %}
 {% include 'reset.html' %}
 {% endblock %}

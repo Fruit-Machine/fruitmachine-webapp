@@ -1,16 +1,13 @@
 {% extends "base.html" %}
+{% block header %}
+Debrief
+{% endblock %}
 {% block content %}
-<div class="row">
-	<div class="col-12">
-		<h2>Debrief</h2>
-		<p>
-		Here we write some stuff that explains what the
-		Fruit Machine is all about.
-		</p>
-	</div>
-<pre>
-{{ user }}
-</pre>
-</div>
+<p>
+Here we write some stuff that explains what the
+Fruit Machine is all about.
+</p>
+{% endblock %}
+{% block footer %}
 {% include 'reset.html' %}
 {% endblock %}

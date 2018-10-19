@@ -1,6 +1,8 @@
 {% extends "base.html" %}
+{% block header %}
+Hello, {{ user_name }}.
+{% endblock %}
 {% block content %}
-<p>Hello, {{ user_name }}.</p>
 <form method="post" action="/question/1">
 <div class="row">
 	<div class="col-12 form-group">
@@ -16,5 +18,7 @@
 	</div>
 </div>
 </form>
+{% endblock %}
+{% block footer %}
 {% include 'reset.html' %}
 {% endblock %}

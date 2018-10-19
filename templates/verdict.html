@@ -1,10 +1,12 @@
 {% extends "base.html" %}
+{% block header %}
+Survey complete
+{% endblock %}
 {% block content %}
 <div class="row">
 	<div class="col-12">
-		<p>Survey complete</p>
 		<p>Your identity is:</p>
-		<dl style="border-left: 20px solid #{{ user['colour_hex'] }}">
+		<dl>
 			<dt>Name</dt>
 			<dd>{{ user['name'] }}</dd>
 			<dt>Sexuality</dt>
@@ -13,10 +15,14 @@
 			<dd>{{ user['gender'] }}</dd>
 		</dl>
 	</div>
+<!--
 <pre>
 {{ user }}
 </pre>
+-->
 </div>
+{% endblock %}
+{% block footer %}
 <form action="/debrief">
 	<button type="submit" class="btn btn-success btn-lg btn-block">What the hell was that?</button>
 </form>

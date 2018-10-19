@@ -13,7 +13,17 @@
 	<div class="container">
 		<h1>The Fruit Machine</h1>
 		<div class="content">
-			{% block content %}{% endblock %}
+			<div class="card text-center">
+				<div class="card-header">
+					{% block header %}{% endblock %}
+				</div>
+				<div class="card-body">
+					{% block content %}{% endblock %}
+				</div>
+				<div class="card-footer">
+					{% block footer %}{% endblock %}
+				</div><!-- class="footer" -->
+			</div>
 		</div><!-- class="content" -->
 	</div><!-- class="container" -->
 	<!-- Optional JavaScript -->
