@@ -1,14 +1,202 @@
 {
+	"4": {
+		"question": "I think I would enjoy the work of a librarian.",
+		"responses": ["True", "False"]
+	},
+	"25": {
+		"question": "I would like to be a singer.",
+		"responses": ["True", "False"]
+	},
+	"62": {
+		"question": "I have often wished I were a girl. (or if you are a girl) I have never been sorry that I am a girl.",
+		"responses": ["True", "False"]
+	},
+	"64": {
+		"question": "I enjoy reading love stories.",
+		"responses": ["True", "False"]
+	},
+	"67": {
+		"question": "I like poetry.",
+		"responses": ["True", "False"]
+	},
+	"74": {
+		"question": "I would like to be a florist.",
+		"responses": ["True", "False"]
+	},
+	"80": {
+		"question": "I would like to be a nurse.",
+		"responses": ["True", "False"]
+	},
+	"112": {
+		"question": "I like dramatics.",
+		"responses": ["True", "False"]
+	},
+	"128": {
+		"question": "I like to cook.",
+		"responses": ["True", "False"]
+	},
+	"137": {
+		"question": "I used to keep a diary.",
+		"responses": ["True", "False"]
+	},
+	"166": {
+		"question": "I am worried about sex.",
+		"responses": ["True", "False"]
+	},
+	"177": {
+		"question": "My hands have not become clumsy or awkward.",
+		"responses": ["True", "False"]
+	},
+	"187": {
+		"question": "If I were a reporter, I would very much like to report news of the theatre.",
+		"responses": ["True", "False"]
+	},
+	"191": {
+		"question": "I would like to be a journalist.",
+		"responses": ["True", "False"]
+	},
+	"196": {
+		"question": "I frequently find myself worrying about something.",
+		"responses": ["True", "False"]
+	},
+	"205": {
+		"question": "Some members of my family have habits that bother and annoy me very much.",
+		"responses": ["True", "False"]
+	},
+	"209": {
+		"question": "I like to talk about sex.",
+		"responses": ["True", "False"]
+	},
+	"219": {
+		"question": "I have been disappointed in love.",
+		"responses": ["True", "False"]
+	},
+	"236": {
+		"question": "If I were an artist, I would like to draw flowers.",
+		"responses": ["True", "False"]
+	},
+	"251": {
+		"question": "I have often felt that strangers were looking at me critically.",
+		"responses": ["True", "False"]
+	},
+	"256": {
+		"question": "Once in a while I feel hate toward members of my family who I normally love.",
+		"responses": ["True", "False"]
+	},
+	"268": {
+		"question": "I wish I were not bothered by thoughts about sex.",
+		"responses": ["True", "False"]
+	},
+	"271": {
+		"question": "I think that I feel more intensely than other people do.",
+		"responses": ["True", "False"]
+	},
 	"1": {
-		"question": "On a scale from zero to five, how gay are you?",
-		"responses": ["0", "1", "2", "3", "4", "5"]
+		"question": "I like mechanics magazines.",
+		"responses": ["True", "False"]
 	},
-	"2": {
-		"question": "Do you like to look at flowers?",
-		"responses": ["Yes, very much", "Somewhat", "Meh", "Hate it"]
+	"19": {
+		"question": "When I take a new job, I like to find out whom it is important to be nice to.",
+		"responses": ["True", "False"]
 	},
-	"3": {
-		"question": "True or false: you would be sexually attracted to an identical copy of yourself.",
+	"26": {
+		"question": "I feel that is certainly best to keep my mouth shut when I am in trouble.",
+		"responses": ["True", "False"]
+	},
+	"27": {
+		"question": "When people do people me wrong, I feel I should pay them back, just for the principle of it.",
+		"responses": ["True", "False"]
+	},
+	"63": {
+		"question": "My feelings are not easily hurt.",
+		"responses": ["True", "False"]
+	},
+	"68": {
+		"question": "I sometimes tease animals.",
+		"responses": ["True", "False"]
+	},
+	"69": {
+		"question": "I think I would like the kind of work a forest ranger does.",
+		"responses": ["True", "False"]
+	},
+	"76": {
+		"question": "It takes a lot of argument to convince most people of the truth.",
+		"responses": ["True", "False"]
+	},
+	"86": {
+		"question": "I like to go to parties and other affairs where there is a lot of loud fun.",
+		"responses": ["True", "False"]
+	},
+	"103": {
+		"question": "I enjoy a race or game more when I bet on it.",
+		"responses": ["True", "False"]
+	},
+	"104": {
+		"question": "Most people are honest chiefly because they are afraid of being caught.",
+		"responses": ["True", "False"]
+	},
+	"107": {
+		"question": "My table manners are not quite as good at home as when I am out in company.",
+		"responses": ["True", "False"]
+	},
+	"120": {
+		"question": "I frequently find it necessary to stand up for what I think is right.",
+		"responses": ["True", "False"]
+	},
+	"133": {
+		"question": "I would like to be a soldier.",
+		"responses": ["True", "False"]
+	},
+	"163": {
+		"question": "I do not have a great fear of snakes.",
+		"responses": ["True", "False"]
+	},
+	"184": {
+		"question": "I daydream very little.",
+		"responses": ["True", "False"]
+	},
+	"197": {
+		"question": "I think I would like the work of a building contractor.",
+		"responses": ["True", "False"]
+	},
+	"199": {
+		"question": "I like science.",
+		"responses": ["True", "False"]
+	},
+	"201": {
+		"question": "I very much like hunting.",
+		"responses": ["True", "False"]
+	},
+	"207": {
+		"question": "I would like to belong to several clubs.",
+		"responses": ["True", "False"]
+	},
+	"231": {
+		"question": "I like to be with a crowd who play jokes on one another.",
+		"responses": ["True", "False"]
+	},
+	"235": {
+		"question": "I was a slow learner in school.",
+		"responses": ["True", "False"]
+	},
+	"237": {
+		"question": "It does not bother me that I am not better looking.",
+		"responses": ["True", "False"]
+	},
+	"239": {
+		"question": "I’m entirely self-confident.",
+		"responses": ["True", "False"]
+	},
+	"254": {
+		"question": "Most people make friends because friends are likely to be useful to them.",
+		"responses": ["True", "False"]
+	},
+	"257": {
+		"question": "If I were a reporter I would very much like to report sporting news.",
+		"responses": ["True", "False"]
+	},
+	"272": {
+		"question": "There was never a time in my life when I liked to play with dolls.",
 		"responses": ["True", "False"]
 	}
 }
