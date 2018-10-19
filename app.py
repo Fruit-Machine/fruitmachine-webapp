@@ -44,7 +44,8 @@ def question(question_id):
     if not 'portrait' in user or not user['portrait']:
         return start()
     # Now let's load the question object
-    question, qdata = fruit_machine.get_question(question_id)
+    # TODO remove qdata from all the logic here
+    question, qdata = fruit_machine.get_question(user)
     # Render page
     if question:
         return render_template('question.html', user=user, question=question, qdata=qdata, next=int(question_id)+1)

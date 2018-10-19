@@ -150,15 +150,20 @@ Functions for dealing with the questions.json file: turning its entries
 into question objects
 '''
 
-# Given a question number, return the corresponding question object
-def get_question(number):
-    import json
+# Given a user, return a question object they haven't yet answered
+def get_question(user):
+    import json, random
     question_file = open(app_directory + '/questions.json')
     question_data = json.loads(question_file.read())
     question = False
-    if number in question_data:
-        question = question_data[number]
-        question['id'] = number
+    question_keys = list(question_data.keys())
+    random.shuffle(question_keys)
+    for key in question_keys:
+        if is_int(key) and key not in user:
+            question = question_data[key]
+            question['id'] = key
+            break
+    # TODO remove question_data from the return
     return question, question_data
 
 # Helper methods
