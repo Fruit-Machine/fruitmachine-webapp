@@ -24,7 +24,7 @@ This is a Python web application that performs the following functions:
 ```
   $ python3 app.py
 ```
-4. Open your web browser to http://localhost:5000/
+4. Open your web browser to http://localhost:8080/
 
 ## Adding/editing questions:
 
