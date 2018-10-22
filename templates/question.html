@@ -4,7 +4,7 @@ Great!  Let’s start with a few true or false questions.  If you
 aren’t sure which to answer, just go with whichever feels best.
 {% endblock %}
 {% block content %}
-<form action="/submit/{{ user_id }}">
+<form method="post" action="/submit/{{ user_id }}">
 <div class="row">
 	<div class="col-12 form-group">
 		<label>
@@ -21,8 +21,8 @@ aren’t sure which to answer, just go with whichever feels best.
 {% endblock %}
 {% block footer %}
 {% if qcount >= 5 %}
-<form action="/submit/{{ user_id }}">
-	<button type="submit" name="cancel" class="btn btn-success btn-lg btn-block">I'm done with this test</button>
+<form method="post" action="/submit/{{ user_id }}">
+	<button type="submit" name="cancel" value="true" class="btn btn-success btn-lg btn-block">I'm done with this test</button>
 </form>
 {% endif %}
 {% include 'reset.html' %}

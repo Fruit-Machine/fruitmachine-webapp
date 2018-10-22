@@ -13,7 +13,7 @@ Functions dealing with connecting to and communicating with the Hue bridge
 '''
 from phue import Bridge
 # Set this to False to run the app without Hue support
-with_hue = False
+with_hue = True
 # IP address of the Hue bridge
 bridge_ip = '192.168.1.2'
 lamp_name = 'Gayness Lamp'
@@ -38,7 +38,7 @@ change the colour of our bulb
 def set_light(xyb):
     if not with_hue: 
         return
-    b.set_light(lamp_name, {'on': True, 'xy': xyb[0:2], 'effect': 'none', 'bri': int(xyb[2]*255)})
+    b.set_light(lamp_name, {'on': True, 'xy': xyb[0:2], 'effect': 'none', 'bri': int((xyb[2]/256)*255)})
 
 '''
 Trigger the "colorloop" effect of the light
