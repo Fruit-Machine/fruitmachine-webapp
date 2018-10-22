@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block extra_css %}
+	<link rel="stylesheet" href="/static/css/spinner.css">
+{% endblock %}
+{% block header %}
+Survey complete
+{% endblock %}
+{% block content %}
+<div class="row">
+	<div class="col-12">
+		<p>your results are loading...</p>
+	</div>
+</div>
+<div class="loader-wrapper">
+	<div class="loader">
+		<div class="dot dot1"><i></i></div>
+		<div class="dot dot2"><i></i></div>
+		<div class="dot dot3"><i></i></div>
+		<div class="dot dot4"><i></i></div>
+		<div class="dot dot5"><i></i></div>
+		<div class="dot dot6"><i></i></div>
+		<div class="dot dot7"><i></i></div>
+		<div class="dot dot8"><i></i></div>
+		<div class="dot dot9"><i></i></div>
+	</div>
+</div>
+{% endblock %}
+{% block extra_js %}
+<script>
+window.setTimeout(function() {
+	location.href = '/verdict/{{ user_id }}';
+}, 5000);
+</script>
+{% endblock %}

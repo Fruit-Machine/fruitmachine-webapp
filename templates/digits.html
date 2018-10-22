@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block header %}
+Hello, {{ user['name'] }}.
+{% endblock %}
+{% block content %}
+<form method="post" action="/submit/{{ user['id'] }}">
+<div class="row">
+	<div class="col-12 form-group">
+		<p>Please enter your D2 and D4 measurements below.</p>
+	</div>
+	<div class="col-6 form-group">
+		<label>
+			D2
+			<input type="number" name="d2" min="1" max="999" class="form-control" required/>
+		</label>
+	</div>
+	<div class="col-6 form-group">
+		<label>
+			D4
+			<input type="number" name="d4" min="1" max="999" class="form-control" required/>
+		</label>
+	</div>
+	<div class="col-12 form-group">
+		<input type="submit" class="btn btn-primary" value="Continue"/>
+	</div>
+</div>
+</form>
+{% endblock %}
+{% block footer %}
+{% include 'reset.html' %}
+{% endblock %}

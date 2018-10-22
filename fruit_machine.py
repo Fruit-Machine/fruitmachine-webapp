@@ -13,13 +13,13 @@ Functions dealing with connecting to and communicating with the Hue bridge
 '''
 from phue import Bridge
 # Set this to False to run the app without Hue support
-with_hue = True
+with_hue = False
 # IP address of the Hue bridge
 bridge_ip = '192.168.1.2'
 lamp_name = 'Gayness Lamp'
 try:
     b = Bridge(bridge_ip) if with_hue else None
-except ConnectionRefusedError:
+except:
     with_hue = False
 
 '''
@@ -43,10 +43,10 @@ def set_light(xyb):
 '''
 Trigger the "colorloop" effect of the light
 '''
-def colorloop():
+def colorloop(speed=10):
     if not with_hue:
         return
-    b.set_light(lamp_name, {'on': True, 'effect': 'colorloop'})
+    b.set_light(lamp_name, {'on': True, 'effect': 'colorloop', 'transitiontime': speed})
 
 '''
 Turn light off
@@ -82,8 +82,9 @@ def save_user(user):
     pickle.dump(user, pickle_out)
     pickle_out.close()
 
-def evaluate_user(user):
+def evaluate_user(user_id):
     import hashlib, colour
+    user = load_user(user_id)
     # Create a hash of the user
     m=hashlib.md5()
     for key in sorted(user.keys()):
@@ -153,21 +154,28 @@ Functions for dealing with the questions.json file: turning its entries
 into question objects
 '''
 
-# Given a user, return a question object they haven't yet answered
-def get_question(user):
+# Given a user, return a question object they haven't yet answered.
+# If all questions have been answered, return False.
+def get_question(user_id):
     import json, random
     question_file = open(app_directory + '/questions.json')
     question_data = json.loads(question_file.read())
+    # Initialize the return value to False
     question = False
-    question_keys = list(question_data.keys())
-    random.shuffle(question_keys)
-    for key in question_keys:
-        if is_int(key) and key not in user:
-            question = question_data[key]
-            question['id'] = key
-            break
-    # TODO remove question_data from the return
-    return question, question_data
+    # Get all the question numbers in the data file
+    question_numbers = list(question_data.keys())
+    # Get all the question numbers that have already been answered
+    user = load_user(user_id)
+    answered = [x for x in user if is_int(x)]
+    # Calculate the set of questions that have not been answered
+    unanswered = list(set(question_numbers) - set(answered))
+    # If there are any unanswered questions, pick a random one.
+    if unanswered:
+        random.shuffle(unanswered)
+        question = question_data[unanswered[0]]
+        question['id'] = unanswered[0]
+    # return the chosen question, or False if they're all answered
+    return question, len(answered)
 
 # Helper methods
 

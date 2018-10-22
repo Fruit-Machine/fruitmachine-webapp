@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block header %}
+You look great!
+{% endblock %}
+{% block content %}
+<form method="post" action="/submit/{{ user_id }}">
+<div class="row">
+	<img src="{{ user_portrait }}" style="height: 250px;width: 100%;object-fit: contain;"/>
+	<div class="col-12 form-group">
+		<p>
+		Now, an assistant will help you place the Fruit Machine’s 
+		state-of-the-art neuroimaging apparatus on your head.
+		</p>
+		<p>
+		Please click "Continue" once this is done.
+		</p>
+	</div>
+	<div class="col-12 form-group">
+		<input type="submit" class="btn btn-primary" name="headset" value="Continue"/>
+	</div>
+</div>
+</form>
+{% endblock %}
+{% block footer %}
+{% include 'reset.html' %}
+{% endblock %}
