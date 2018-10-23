@@ -40,7 +40,7 @@ def submit(user_id):
     fm.save_user(user)
     fm.colorloop()
     # Let's see how far along we are:
-    if not user.get('d2') or not user.get('d4'):
+    if not user.get('2d') or not user.get('4d'):
         # We haven't completed the "digits" page yet
         return redirect(url_for('digits', user_id=user_id))
     if not user.get('portrait'):
