@@ -1,16 +1,23 @@
 {% extends "base.html" %}
+{% block header %}
+The Fruit Machine is
+{% endblock %}
 {% block content %}
 {% for i in range(7) %}
 <img src="{{ fruits[i] }}" class="inline-icon"/>
 {% endfor %}
 <dl>
-	<dt>Brain and words</dt>
+	<dt>writer, concept, designer</dt>
 	<dd>J. Dymphna Coy</dd>
-	<dt>Hacking</dt>
+	<dt>hacker</dt>
 	<dd>David Leaman</dd>
-	<dt>Icons</dt>
-	<dd><a href="http://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> (<a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a>)</dd>
-	<dd><a href="https://www.flaticon.com/authors/smashicons" title="Smashicons">Smashicons</a> from <a href="https://www.flaticon.com/"     title="Flaticon">www.flaticon.com</a> (<a href="http://creativecommons.org/licenses/by/3.0/"     title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a>)</dd>
+	<dt>science consultant</dt>
+	<dd>Sarah Nyberg</dd>
+	<dt>booth babe</dt>
+	<dd>Ben Brock</dd>
+	<dt>Icons from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> (<a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a>) by</dt>
+	<dd><a href="http://www.freepik.com" title="Freepik">Freepik</a></dd>
+	<dd><a href="https://www.flaticon.com/authors/smashicons" title="Smashicons">Smashicons</a></dd>
 </dl>
 {% for i in range(7,14) %}
 <img src="{{ fruits[i] }}" class="inline-icon"/>
