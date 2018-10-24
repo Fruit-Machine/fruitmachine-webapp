@@ -105,9 +105,17 @@ def verdict(user_id):
 def debrief(user_id):
     return render_template('debrief.html', user_id=user_id)
 
+available_fruits = ['apple', 'avocado', 'banana', 'blueberries',
+        'cherry', 'coconut', 'grapes', 'lemon', 'lime', 
+        'orange', 'pineapple', 'raspberry',
+        'strawberry', 'watermelon']
+
 @app.route('/credits')
 def credits():
-    return render_template('credits.html')
+    import random
+    random.shuffle(available_fruits)
+    return render_template('credits.html', 
+            fruits=[url_for('static', filename='img/' + x + '.png') for x in available_fruits])
 
 # Final route. Clear the user's data.
 @app.route('/free', methods=['POST', 'GET'])
@@ -116,10 +124,6 @@ def free():
         fm.delete_user(request.form.get('id'))
     fm.set_white()
     # Produce a random fruit icon
-    available_fruits = ['apple', 'avocado', 'banana', 'blueberries',
-            'cherry', 'coconut', 'grapes', 'lemon', 'lime', 
-            'orange', 'pineapple', 'raspberry',
-            'strawberry', 'watermelon']
     import random
     random.shuffle(available_fruits)
     fruit = available_fruits[0]

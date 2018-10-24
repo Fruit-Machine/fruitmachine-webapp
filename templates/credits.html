@@ -1,3 +1,18 @@
+{% extends "base.html" %}
 {% block content %}
-<div>Some icons made by <a href="http://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
+{% for i in range(7) %}
+<img src="{{ fruits[i] }}" class="inline-icon"/>
+{% endfor %}
+<dl>
+	<dt>Brain and words</dt>
+	<dd>J. Dymphna Coy</dd>
+	<dt>Hacking</dt>
+	<dd>David Leaman</dd>
+	<dt>Icons</dt>
+	<dd><a href="http://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> (<a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a>)</dd>
+	<dd><a href="https://www.flaticon.com/authors/smashicons" title="Smashicons">Smashicons</a> from <a href="https://www.flaticon.com/"     title="Flaticon">www.flaticon.com</a> (<a href="http://creativecommons.org/licenses/by/3.0/"     title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a>)</dd>
+</dl>
+{% for i in range(7,14) %}
+<img src="{{ fruits[i] }}" class="inline-icon"/>
+{% endfor %}
 {% endblock %}
