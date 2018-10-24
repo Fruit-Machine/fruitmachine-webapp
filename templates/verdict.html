@@ -5,7 +5,7 @@ Survey complete
 {% block content %}
 <div class="row">
 	<div class="col-6">
-		<img src="{{ user['portrait'] }}" style="height: 250px;width: 100%;object-fit: contain;"/>
+		<img src="{{ user['portrait'] }}" class="side-portrait"/>
 	</div>
 	<div class="col-6">
 		<p>Your identity is:</p>
@@ -26,7 +26,7 @@ Survey complete
 </div>
 {% endblock %}
 {% block footer %}
-<form action="/debrief">
+<form action="/debrief/{{ user['id'] }}">
 	<button type="submit" class="btn btn-success btn-lg btn-block">What the hell was that?</button>
 </form>
 {% include 'reset.html' %}

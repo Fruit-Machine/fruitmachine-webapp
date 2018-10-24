@@ -9,5 +9,8 @@ Fruit Machine is all about.
 </p>
 {% endblock %}
 {% block footer %}
-{% include 'reset.html' %}
+<form method="post" action="/free">
+	<input type="hidden" name="id" value="{{ user_id }}"/>
+	<button type="submit" class="btn btn-success btn-lg btn-block">Your results are ready</button>
+</form>
 {% endblock %}

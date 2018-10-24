@@ -101,9 +101,26 @@ def verdict(user_id):
     fm.set_light(user['colour_xyb'])
     return render_template('verdict.html', user=user)
 
-@app.route('/debrief')
-def debrief():
-    return render_template('debrief.html')
+@app.route('/debrief/<user_id>')
+def debrief(user_id):
+    return render_template('debrief.html', user_id=user_id)
+
+# Final route. Clear the user's data.
+@app.route('/free', methods=['POST', 'GET'])
+def free():
+    if request.form.get('id'):
+        fm.delete_user(request.form.get('id'))
+    fm.set_white()
+    # Produce a random fruit icon
+    available_fruits = ['apple', 'avocado', 'banana', 'blueberries',
+            'cherry', 'coconut', 'grapes', 'lemon', 'lime', 
+            'orange1', 'orange', 'pineapple', 'raspberry',
+            'strawberry', 'watermelon']
+    import random
+    random.shuffle(available_fruits)
+    fruit = available_fruits[0]
+    image_url = url_for('static', filename='img/' + fruit + '.png')
+    return render_template('free.html', img_url=image_url)
 
 # When we run this script directly, start a server
 if __name__ == '__main__':

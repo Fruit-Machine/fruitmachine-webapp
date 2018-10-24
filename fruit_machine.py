@@ -13,7 +13,7 @@ Functions dealing with connecting to and communicating with the Hue bridge
 '''
 from phue import Bridge
 # Set this to False to run the app without Hue support
-with_hue = True
+with_hue = False
 # IP address of the Hue bridge
 bridge_ip = '192.168.1.2'
 lamp_name = 'Gayness Lamp'
@@ -39,6 +39,14 @@ def set_light(xyb):
     if not with_hue: 
         return
     b.set_light(lamp_name, {'on': True, 'xy': xyb[0:2], 'effect': 'none', 'bri': int((xyb[2]/256)*255)})
+
+'''
+Set our bulb to a neutral white
+'''
+def set_white():
+    if not with_hue:
+        return
+    b.set_light(lamp_name, {'on': True, 'ct': 500, 'effect': 'none', 'bri': 127})
 
 '''
 Trigger the "colorloop" effect of the light
@@ -104,6 +112,17 @@ def evaluate_user(user_id):
     # Hack a different colour:
     user['colour_xyb'] = colour.hack_xyb(hexr, hexg, hexb)
     return user
+
+# Delete all traces of a user from our directories
+def delete_user(user_id):
+    # Delete the user pickle
+    pickle = user_file(user_id)
+    if os.path.exists(pickle):
+        os.remove(pickle)
+    # Delete the user portrait
+    import glob
+    for portrait in glob.glob(app_directory + '/static/portraits/' + user_id + '.*'):
+        os.remove(portrait)
 
 # Given an ID, return a string path for the corresponding pickle file
 def user_file(user_id):

@@ -21,3 +21,15 @@ h1 {
 	color: #fcd204;
 	font-weight: bold;
 }
+
+.side-portrait {
+   height: 250px;
+   width: 50%;
+   object-fit: contain;
+}
+
+.inline-icon {
+	height: 2rem;
+	width: 2rem;
+	object-fit: contain;
+}
