@@ -1,12 +1,13 @@
 {% extends "base.html" %}
 {% block header %}
+Welcome to the Fruit Machine!
 {% endblock %}
 {% block content %}
-<form method="post" action="start">
+<form method="post" action="/submit/">
 	<div class="form-group">
 		<label>
 			Please enter your name
-			<input type="text" name="name" class="form-control"/>
+			<input type="text" name="name" class="form-control" required/>
 		</label>
 	</div>
 	<div class="col-12">

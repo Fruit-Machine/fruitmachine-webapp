@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block header %}
+You look great!
+{% endblock %}
+{% block content %}
+<form method="post" action="/submit/{{ user_id }}">
+<div class="row">
+	<div class="col-12 form-group">
+		<p>
+		Now, an assistant will help you place the Fruit Machine’s 
+		state-of-the-art neuroimaging apparatus on your head.
+		</p>
+		<p>
+		Please click "Continue" once this is done.
+		</p>
+	</div>
+	<div class="col-12 form-group">
+		<button type="submit" class="btn btn-primary" name="headset" value="Continue">Continue</button>
+	</div>
+</div>
+</form>
+{% endblock %}
+{% block footer %}
+{% include 'reset.html' %}
+{% endblock %}

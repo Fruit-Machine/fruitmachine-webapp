@@ -1,12 +1,12 @@
 {% extends "base.html" %}
 {% block header %}
-Please answer the following question honestly.
+Great!  Let’s start with a few true or false questions.  If you 
+aren’t sure which to answer, just go with whichever feels best.
 {% endblock %}
 {% block content %}
-<form method="post" action="/question/{{ next }}">
+<form method="post" action="/submit/{{ user_id }}">
 <div class="row">
 	<div class="col-12 form-group">
-		<input type="hidden" name="id" value="{{ user['id'] }}"/>
 		<label>
 			{{ question['question'] }}
 		</label>
@@ -20,15 +20,9 @@ Please answer the following question honestly.
 </form>
 {% endblock %}
 {% block footer %}
-<!--
-<pre>
-{{ user }}
-{{ qdata }}
-</pre>
- -->
-{% if next > 5 %}
-<form action="/verdict/{{ user['id'] }}">
-	<button type="submit" class="btn btn-success btn-lg btn-block">I'm done with this test</button>
+{% if qcount >= 5 %}
+<form method="post" action="/submit/{{ user_id }}">
+	<button type="submit" name="cancel" value="true" class="btn btn-success btn-lg btn-block">I'm done with this test</button>
 </form>
 {% endif %}
 {% include 'reset.html' %}
