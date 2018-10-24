@@ -13,7 +13,7 @@ Functions dealing with connecting to and communicating with the Hue bridge
 '''
 from phue import Bridge
 # Set this to False to run the app without Hue support
-with_hue = False
+with_hue = True
 # IP address of the Hue bridge
 bridge_ip = '192.168.1.2'
 lamp_name = 'Gayness Lamp'
@@ -26,43 +26,63 @@ except:
     "run-once" connect command.
 '''
 def connect_hue():
+    global with_hue
     if not with_hue:
         return
     #if os.path.isfile(home_directory + "/.python_hue"):
     #    return
-    b.connect()
+    try:
+        b.connect()
+    except:
+        with_hue = False
 
 '''
 change the colour of our bulb
 '''
 def set_light(xyb):
+    global with_hue
     if not with_hue: 
         return
-    b.set_light(lamp_name, {'on': True, 'xy': xyb[0:2], 'effect': 'none', 'bri': int((xyb[2]/256)*255)})
+    try:
+        b.set_light(lamp_name, {'on': True, 'xy': xyb[0:2], 'effect': 'none', 'bri': int((xyb[2]/256)*255)})
+    except:
+        with_hue = False
 
 '''
 Set our bulb to a neutral white
 '''
 def set_white():
+    global with_hue
     if not with_hue:
         return
-    b.set_light(lamp_name, {'on': True, 'ct': 500, 'effect': 'none', 'bri': 127})
+    try:
+        b.set_light(lamp_name, {'on': True, 'ct': 500, 'effect': 'none', 'bri': 127})
+    except:
+        with_hue = False
 
 '''
 Trigger the "colorloop" effect of the light
 '''
 def colorloop(speed=10):
+    global with_hue
     if not with_hue:
         return
-    b.set_light(lamp_name, {'on': True, 'effect': 'colorloop', 'transitiontime': speed})
+    try:
+        b.set_light(lamp_name, {'on': True, 'effect': 'colorloop', 'transitiontime': speed})
+    except:
+        with_hue = False
 
 '''
 Turn light off
 '''
 def light_off():
+    global with_hue
     if not with_hue:
         return
-    b.set_light(lamp_name, {'on': False})
+    try:
+        b.set_light(lamp_name, {'on': False})
+    except:
+        with_hue = False
 
 '''
 Functions dealing with user objects: defining, updating, storing, loading
