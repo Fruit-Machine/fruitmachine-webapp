@@ -1,11 +1,10 @@
 {% extends "base.html" %}
+{% import 'fruit.html' as fruit %}
 {% block header %}
 The Fruit Machine is
 {% endblock %}
 {% block content %}
-{% for i in range(7) %}
-<img src="{{ fruits[i] }}" class="inline-icon"/>
-{% endfor %}
+{{ fruit.icons(7, 'inline-icon') }}
 <dl>
 	<dt>writer, concept, designer</dt>
 	<dd>J. Dymphna Coy</dd>
@@ -19,10 +18,9 @@ The Fruit Machine is
 	<dd><a href="http://www.freepik.com" title="Freepik">Freepik</a></dd>
 	<dd><a href="https://www.flaticon.com/authors/smashicons" title="Smashicons">Smashicons</a></dd>
 </dl>
-{% for i in range(7,14) %}
-<img src="{{ fruits[i] }}" class="inline-icon"/>
-{% endfor %}
+{{ fruit.icons(7, 'inline-icon') }}
 {% endblock %}
 {% block footer %}
+<a href="/coda" class="btn btn-success btn-lg btn-block">Coda</a>
 {% include 'reset.html' %}
 {% endblock %}

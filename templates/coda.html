@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% import 'fruit.html' as fruit %}
+{% block header %}
+coda:
+{% endblock %}
+{% block content %}
+<p>
+One of the earliest of these scientific devices used to detect homosexuality was developed by the Royal Canadian Mounted Police during the Cold War. The device was created to identify gay men in civil service, who were deemed a national security risk.  The device operated by measuring pupillary response in men when they were shown pictures of semi-nude men from men's fitness magazines. 
+</p>
+<p>
+The project had no official name. It was colloquially known as <em>the fruit machine</em>.
+</p>
+{{ fruit.icon('inline-icon') }}
+{% endblock %}
+{% block footer %}
+<div><a href="/credits" class="btn btn-primary btn-lg btn-block">Credits</a></div>
+{% include 'reset.html' %}
+{% endblock %}
+

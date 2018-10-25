@@ -1,10 +1,13 @@
 {% extends "base.html" %}
+{% import 'fruit.html' as fruit %}
 {% block content %}
 <p>
 You are free.
 </p>
-<img src="{{ img_url }}" class="inline-icon"/>
+{{ fruit.icon('inline-icon') }}
 {% endblock %}
 {% block footer %}
+<a href="/coda" class="btn btn-success btn-lg btn-block">Coda</a>
+<a href="/credits" class="btn btn-primary btn-lg btn-block">Credits</a>
 {% include 'reset.html' %}
 {% endblock %}

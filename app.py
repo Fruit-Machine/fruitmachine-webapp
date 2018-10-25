@@ -53,7 +53,7 @@ def submit(user_id):
         # We haven't clicked "Cancel" on the user questions
         return redirect(url_for('question', user_id=user_id))
     # We've finished the whole process
-    return redirect(url_for('compute', user_id=user_id))
+    return redirect(url_for('debrief', user_id=user_id))
 
 # Cake route
 @app.route('/cake')
@@ -110,12 +110,13 @@ available_fruits = ['apple', 'avocado', 'banana', 'blueberries',
         'orange', 'pineapple', 'raspberry',
         'strawberry', 'watermelon']
 
+@app.route('/coda')
+def coda():
+    return render_template('coda.html')
+
 @app.route('/credits')
 def credits():
-    import random
-    random.shuffle(available_fruits)
-    return render_template('credits.html', 
-            fruits=[url_for('static', filename='img/' + x + '.png') for x in available_fruits])
+    return render_template('credits.html')
 
 # Final route. Clear the user's data.
 @app.route('/free', methods=['POST', 'GET'])
@@ -123,12 +124,7 @@ def free():
     if request.form.get('id'):
         fm.delete_user(request.form.get('id'))
     fm.set_white()
-    # Produce a random fruit icon
-    import random
-    random.shuffle(available_fruits)
-    fruit = available_fruits[0]
-    image_url = url_for('static', filename='img/' + fruit + '.png')
-    return render_template('free.html', img_url=image_url)
+    return render_template('free.html')
 
 # When we run this script directly, start a server
 if __name__ == '__main__':

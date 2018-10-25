@@ -1,0 +1,12 @@
+{% set fruits = ['apple', 'avocado', 'banana', 'blueberries',
+	'cherry', 'coconut', 'grapes', 'lemon', 'lime', 
+	'orange', 'pineapple', 'raspberry',
+	'strawberry', 'watermelon'] %}
+{% macro icon(class='') %}
+<img src="/static/img/{{ fruits|random }}.png" class="{{ class }}"/>
+{% endmacro %}
+{% macro icons(num, class='') %}
+{% for i in range(num) %}
+{{ icon(class) }}
+{% endfor %}
+{% endmacro %}

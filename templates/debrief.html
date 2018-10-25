@@ -1,16 +1,124 @@
 {% extends "base.html" %}
+{% import 'fruit.html' as fruit %}
+{% block extra_css %}
+	<link rel="stylesheet" href="/static/css/spinner.css">
+{% endblock %}
 {% block header %}
-Debrief
+The Fruit Machine is processing your results!
 {% endblock %}
 {% block content %}
+<div class="loader-wrapper">
+	<div class="loader">
+		<div class="dot dot1"><i></i></div>
+		<div class="dot dot2"><i></i></div>
+		<div class="dot dot3"><i></i></div>
+		<div class="dot dot4"><i></i></div>
+		<div class="dot dot5"><i></i></div>
+		<div class="dot dot6"><i></i></div>
+		<div class="dot dot7"><i></i></div>
+		<div class="dot dot8"><i></i></div>
+		<div class="dot dot9"><i></i></div>
+	</div>
+</div>
 <p>
-Here we write some stuff that explains what the
-Fruit Machine is all about.
+While you wait, why not read a bit about the test?
+{{ fruit.icon('inline-icon') }}
+</p>
+<h2>How does the Fruit Machine work?</h2>
+<p>
+The Fruit Machine uses a variety of scientific methods to analyze your gender.
+</p>
+<h3>Facial analysis and digit ratio</h3>
+<p>
+The ratio of the length of one's ring finger to one's index finger (2D:4D) is widely considered to have a high correlation to one's prenatal sex hormone exposure.  This correlation is well-documented and robustly replicated over various populations. Other studies have attempted to map 2D:4D to various psychological, behavioural, sexual, and medical traits, with varying levels of replicability and reliability. 
+</p>
+<p>
+Facial analysis has garnered quite a bit of attention – and funding – over the last several years. The private sector has particularly embraced the trend, using various algorithms to screen job applicants based on everything from their facial expressions in job interviews to potential employees' LinkedIn photos. Whether this software yields useful results, or is simply a form of conspicuous corporate consumption-cum-digital phrenology remains to be seen. 
+</p>
+<p>
+There is no widely supported, well-replicated software that can identify sexual orientation or gender identity, though many have claimed to be able to do so. 
+</p>
+<h3>Neuroimaging</h3>
+<p>
+Over the last twenty years, immense gains have been made in neuroimaging technology and data analysis. Functional magnetic resonance imaging (fMRI) in particular has allowed for greater resolution in brain scans than previously possible.  However, there have been serious doubts about the ability of fMRI to accurately measure brain activity (a notorious case involved researchers finding brain activity in a dead salmon), or generate meaningful results. The great expense involved in fMRI research makes it particularly prone to find false positives, and to succumb to the faults of the replication crisis plaguing the sciences in general.
+</p>
+<p>
+As the Western cisgender world is tenuously beginning to understand and validate some trans identities (read: binary trans men and women who transition medically and "pass"), the sciences are also turning their gaze towards transgender people. The scientific press is beginning to speak of "the transgender brain" in the same way that it speaks of "the male brain" or "the female brain" or "the gay brain." It is not currently possible to reliably distinguish between male and female, gay and straight via neuroimaging studies.
+</p>
+<h3>Personality testing</h3>
+<p>
+Of all of the methods used by the Fruit Machine, these questions that we've gleaned from a very popular psychiatric personality test are the most widely used and scientifically accepted. Questions like these are used in hospitals, employment questionnaires, and as part of the criminal justice system on a daily basis in North America.
+</p>
+<h2>Why does the Fruit Machine exist?</h2>
+<p>
+Everyone wants to be told who they are: astrology, BuzzFeed quizzes, corporate personality tests.  We want a simple and orderly story to project upon messy, organic business of living. Employers want employees to be predictable and agreeable. We want to look at our children's birth certificates and know whether we will be buying a wedding dress for them in twenty five years.  Facebook wants to know whether it should advertise weight loss, baby clothes, and anti-aging cream, or it if should show us gadgets, razors, and beer. 
+</p>
+<p>
+We want to know what people are, because knowing who they are is too difficult and time-consuming. Organic human relationships don't work in an economy of scale. It's much easier to tell someone who they are than to ask them who they are. Observing a human being in their wholeness is nearly impossible.
+</p>
+<p>
+We use the tools of our era and our culture to adjudicate identity: to both to create it and to enforce it. The Fruit Machine is a product of middle-class North America.
+</p>
+<h2>Sex, Gender, and the Machine</h2>
+<p>
+The Machine assumes binary gender and traditional views of sexuality. It assumes that humanity be readily divided into men, women, gays, and lesbians. (It is, somewhat grudgingly, beginning to acknowledge the existence of bisexuals &mdash; at least, for now.)
+</p>
+<p>
+Like the rest of North American culture, it erases genders and sexualities that do not exist outside of dull, parochial, and colonialist gender ideals. (In North America, the most egregious example of this is the erasure and colonialist redefinition of two-spirit people.)  
+</p>
+<p>
+What does it mean when an identity is recognized and explored by science?
+</p>
+<hr/>
+<p>
+ Modern, post-Freudian scientific analysis of gay men and lesbians has its roots in the AIDS crisis. Gay culture could no longer thumb its nose at a scientific world that had claimed them as deviants. They fought the cops at Stonewall, and now they had to fight the medical establishment who ignored their deaths. Through the courage and fortitude of the gay activists who fought in the streets for their lives, science recognized the role of HIV in AIDS, and stopped regarding homosexuality as a disease.
+</p>
+<p>
+ The post-AIDS crisis world viewed sexuality differently.
+</p>
+<p>
+ Bisexuals had disappeared from view in the '80s: Mick Jagger became straight again. David Bowie became "weird" instead of queer. Freddie Mercury's death from AIDS cemented him as gay in the public imagination, despite his self-identification as bisexual. Tracey Norman didn't get work any more.
+</p>
+<p>
+ There was a renewed focus on biological correlates of homosexual behaviour, mostly focused on gay men. As some correllates were found, the press predictably confused correlation with causation. "The third interstitial nuclei of the anterior hypothalamus shows a marked difference in size between gay men and straight men" does not sell papers; "Gay Brain Region Discovered!" does. 
+</p>
+<p>
+ The media became obsessed with scientific reports of the [nonexistent] "gay gene." (The "gay gene" is another widely disproven scientific hypothesis that is held onto not only by the media, but by the scientific community, despite its fundamental lack of support. Media narratives hold considerable and troubling power over the sciences, despite all of the scientific community's claims to objectivity.  There is something in our collective consciousness that clearly wants a "gay gene" to exist, despite all evidence to the contrary.)
+</p>
+<p>
+ Gay penguins were discussed at length.
+</p>
+<p>
+ As more research began to be done on biological substrates of homosexuality, a discursive shift occurred.  If a behaviour has a biological substrate, after all, then it is assumed to be natural, inborn,and innate.   (This is false. An experienced typist will likely have neurological structures that reflect their skills; this does not mean that they have a natural, inborn ability to type 200 WPM.)
+</p>
+<p>
+ In the mid aughts, evolutionary psychology came into the mainstream, demanding that homosexual behaviour not only be an inborn trait, but also that it was necessarily an adaptation that helped early humanity survive. Most arguments suggested that having a gay aunt or uncle meant that your kinship networks were more likely to survive.
+</p>
+<p>
+ As homosexuality became "natural," it became broadly assumed that gay men and lesbians were therefore exactly like straight couples.  The classical heterosexual relationship paradigm, with all of its oppression, misery, and dullness, was never questioned. It was broadly assumed that gay and lesbian relationships were identical to the idealized heterosexual relationships:  gay men should have the right to wear matching IZOD sweater vests and live in the suburbs, and adopt a baby while they're at it. Queer liberation became contingent upon conforming to heteronormativity as much as possible.
+</p>
+<p>
+ Concerns that queers might be different from heterosexuals, or that the dominant heterosexual relationship paradigm might be hurtful or oppressive, were promptly moved aside. Queers who did not or could not fit into this mold found themselves further alienated.
+</p>
+<p>
+ (This trend is not, to be perfectly clear, the fault of the activists and gay scientists who sought acceptance from the culture around them: one cannot be blamed for trying to seek safety and security by any means necessary in a world that wishes to destroy you.)
+</p>
+<p>
+With the Fruit Machine, we mean to interrogate these trends from an explicitly queer and trans perspective.
+</p>
+<p>
+We are not anti-science per se but we want to start a discussion about what these new technologies mean for the future of queer and trans people. If a machine purports to look at your brain and tell you what gender you are, how is that different from a doctor from twenty years ago looking at one's sexual organs or chromosomes and telling you what gender you are? Should we make queer liberation contingent upon scientific consensus? How might this technology be used to hurt the queer community? Should services be denied to a a person seeking to transition gender, but who has the "wrong" imagery in their fMRI or the wrong 2D:4D ratio?
+</p>
+<p>
+The rise of digital communities has made it easier for queer, transgender, and non-binary people to connect and organize. and to make it easier for people to explore their gender. Queers who don't fit the dominant narrative of what "gay" looks like are finding their voices online. New avenues of activism are opened, and new channels for marginalized people to be heard in broader circles are emerging. An explosion of new gender expressions and terms have come into use over the past ten years, and new forms are being made at this very moment: playful, irreverent (save when they're sincere), and beautiful.
+</p>
+<p>
+The urge to standardize, to taxonomize, to governmentalize – these urges are not foreign to queer culture. With the associated rise of varied expressions of gender and sexuality, various LBGT communities have reacted in sometimes reactionary ways. It is our hope, however, that we will overcome this urge. Rather than policing our borders as a community, perhaps we will learn to focus more on who we place at our centre – about who most needs our help, our love, and our support as community members.
 </p>
 {% endblock %}
 {% block footer %}
 <form method="post" action="/free">
 	<input type="hidden" name="id" value="{{ user_id }}"/>
-	<button type="submit" class="btn btn-success btn-lg btn-block">Your results are ready</button>
+	<button type="submit" class="btn btn-success btn-lg btn-block">Your results are ready!</button>
 </form>
 {% endblock %}
